@@ -16,3 +16,9 @@
 * Automated script executable on Amazon Linux EC2 to deploy the function
 * Unit and Integration test for the function
 * Markdown documentation to setup Alexa skill on developer.amazon.com portal
+
+## Hot to contribute
+
+1. Fork the repo
+2. Make changes and commit to your own repository
+3. Submit a pull request back into this repository
