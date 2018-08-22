@@ -8,9 +8,9 @@
 * Ask whether to read all rates for a provider
 * If answered: 'Yes, ${provider-name}'
 * Read out all rates for the selected provider
-* Otherwise end interaction
+* Otherwise, end the interaction
  
-## Deliverables
+## Development
 
 * Node.Js AWS Lambda hosted function to process the voice interactions
 * Automated script executable on Amazon Linux EC2 to deploy the function
