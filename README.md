@@ -1,4 +1,4 @@
-# Create Alexa Bot to read-out mortgage rates
+# Alexa Bot to read-out mortgage rates
 
 ## Design
 
