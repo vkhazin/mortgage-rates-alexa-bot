@@ -6,7 +6,7 @@
 * Respond to intent: 'Hey Alexa, what todays mortgage rates!'
 * Read out the lowest mortgage rate in each category
 * Ask whether to read all rates for a provider
-* If answered: 'Yes, <provider name>'
+* If answered: 'Yes, ${provier-name}'
 * Read out all rates for the selected provider
 * Otherwise end interaction
  
