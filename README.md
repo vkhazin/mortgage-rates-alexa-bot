@@ -3,6 +3,13 @@
 ## Design
 
 * Use https://github.com/vkhazin/mortgage-rates-service service to fetch mortgage rates
+* Mocked version of the service for development purposes:
+```
+https://s3.us-east-2.amazonaws.com/mortgage-rates-service/full.json
+https://s3.us-east-2.amazonaws.com/mortgage-rates-service/Peoples+Trust.json
+https://s3.us-east-2.amazonaws.com/mortgage-rates-service/Canadian+Lender.json
+https://s3.us-east-2.amazonaws.com/mortgage-rates-service/mcap.json
+```
 * Respond to an intent triggered by: 'Hey Alexa, what are today's mortgage rates!'
 * Read out the lowest mortgage rate in each category, not to exceed 5 (parameter stored in lambda environment variable)
 * Ask whether to read all rates for a provider: 'Would you like to hear all quotes for a specific provider?' If so, please say: "Yes, for" and the provider name'
