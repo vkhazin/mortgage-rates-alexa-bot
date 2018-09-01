@@ -1,0 +1,62 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "mortgage rates",
+      "types": [{
+        "name": "Providers",
+        "values": [{
+            "id": "0",
+            "name": {
+              "value": "Peoples Trust"
+            }
+          },
+          {
+            "id": "1",
+            "name": {
+              "value": "Canadian Lender"
+            }
+          },
+          {
+            "id": "2",
+            "name": {
+              "value": "mcap",
+              "synonyms": [
+                "m. c. a. p."
+              ]
+            }
+          }
+        ]
+      }],
+      "intents": [{
+          "name": "AMAZON.CancelIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "ReadProviderIntent",
+          "slots": [{
+            "name": "providerName",
+            "type": "Providers"
+          }],
+          "samples": [
+            "yes {providerName}",
+            "Yes for {providerName}"
+          ]
+        }
+      ]
+    }
+  }
+}
