@@ -10,13 +10,13 @@
             "Alexa ask mortgage rates yes for m. c. a. p."
           ],
           "name": "mortgage-rates-alexa-bot",
-          "description": "skill for mortgage rates"
+          "description": "skill for mortgage rates",          
+          "smallIconUri": "https://s3.amazonaws.com/arforgethedevpublic/wrench_small.png",
+          "largeIconUri": "https://s3.amazonaws.com/arforgethedevpublic/wrench_large.png"
         }
       },
       "isAvailableWorldwide": true,
       "testingInstructions": "Sample Testing Instructions.",
-      "smallIconUri": "https://s3.amazonaws.com/arforgethedevpublic/wrench_small.png",
-      "largeIconUri": "https://s3.amazonaws.com/arforgethedevpublic/wrench_large.png",
       "category": "EDUCATION_AND_REFERENCE",
       "distributionCountries": []
     },

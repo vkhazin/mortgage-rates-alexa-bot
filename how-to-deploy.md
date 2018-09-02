@@ -62,6 +62,7 @@ then you need to folow hints.
 cd $WORK_FOLDER
 git clone https://github.com/vkhazin/mortgage-rates-alexa-bot.git
 cd mortgage-rates-alexa-bot
+cp ./.ask/config.example ./.ask/config
 cd ./lambda/custom
 yarn install
 yarn test
@@ -74,6 +75,7 @@ ask deploy
 cd $WORK_FOLDER
 git clone https://github.com/vkhazin/mortgage-rates-alexa-bot.git
 cd mortgage-rates-alexa-bot
+cp ./.ask/config.example ./.ask/config
 cd ./lambda/custom
 yarn install --production --flat
 cd ../../
