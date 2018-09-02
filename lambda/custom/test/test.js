@@ -15,7 +15,6 @@ alexaTest.initialize(
 	"amzn1.ask.account.VOID");
 
 describe("Hello World Skill", function () {
-	// tests the behavior of the skill's LaunchRequest
 	describe("LaunchRequest", function () {
 		alexaTest.test([{
 			request: alexaTest.getLaunchRequest(),
@@ -25,7 +24,42 @@ describe("Hello World Skill", function () {
 		}]);
 	});
 
-	// tests the behavior of the skill's CityFactIntent
+	describe("Help intent", function () {
+		alexaTest.test([{
+			request: alexaTest.getIntentRequest("AMAZON.HelpIntent"),
+			repromptsNothing: true,
+			shouldEndSession: true
+		}]);
+	});
+
+
+	describe("session ended request", function () {
+		alexaTest.test([{
+			request: alexaTest.getSessionEndedRequest("test reason"),
+			repromptsNothing: true,
+			shouldEndSession: true
+		}]);
+	});
+
+	describe("cancel", function () {
+		alexaTest.test([{
+			request: alexaTest.getIntentRequest("AMAZON.CancelIntent"),
+			says: "Goodbye!",
+			repromptsNothing: true,
+			shouldEndSession: true
+		}]);
+	});
+
+	
+	describe("stop", function () {
+		alexaTest.test([{
+			request: alexaTest.getIntentRequest("AMAZON.StopIntent"),
+			says: "Goodbye!",
+			repromptsNothing: true,
+			shouldEndSession: true
+		}]);
+	});
+
 	describe('ReadProviderIntent sucess match', function () {
 		const slot = {
 			'providerName': 'Canadian Lender'
@@ -47,7 +81,7 @@ describe("Hello World Skill", function () {
 		}]);
 	});
 
-	// tests the behavior of the skill's CityFactIntent
+
 	describe('ReadProviderIntent no match', function () {
 		const requestWithEntityResolution = alexaTest.addEntityResolutionNoMatchToRequest(
 			alexaTest.getIntentRequest('ReadProviderIntent'),
@@ -63,27 +97,4 @@ describe("Hello World Skill", function () {
 			repromptsNothing: true
 		}]);
 	});
-
-	// // tests the behavior of the skill's HelloWorldIntent
-	// describe("ReadProviderIntent", function () {
-	// 	alexaTest.test([
-	// 		{
-	// 			request: alexaTest.getIntentRequest("ReadProviderIntent"),
-	// 			saysLike: "*", repromptsNothing: true, shouldEndSession: true,
-	// 			hasAttributes: {
-	// 				foo: 'bar'
-	// 			}
-	// 		}
-	// 	]);
-	// });
-
-	// // tests the behavior of the skill's HelloWorldIntent with like operator
-	// describe("HelloWorldIntent like", function () {
-	// 	alexaTest.test([
-	// 		{
-	// 			request: alexaTest.getIntentRequest("HelloWorldIntent"),
-	// 			saysLike: "World", repromptsNothing: true, shouldEndSession: true
-	// 		}
-	// 	]);
-	// });
 });
