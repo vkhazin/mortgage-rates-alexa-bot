@@ -11,6 +11,7 @@
   "dependencies": {
     "ask-sdk-core": "^2.0.0",
     "ask-sdk-model": "^1.0.0",
+    "ask-utils": "https://github.com/fdistorted/ask-utils",
     "axios": "^0.18.0"
   }
 }

@@ -4,6 +4,7 @@
 const Alexa = require('ask-sdk-core');
 const axios = require('axios');
 const utils = require('./skill-utils');
+const askUtils = require('ask-utils');
 
 const links = {
   full: "https://s3.us-east-2.amazonaws.com/mortgage-rates-service/full.json",
@@ -57,6 +58,18 @@ const ReadProviderIntentHandler = {
   handle(handlerInput) {
     const speechText = 'read provider intent hello';
 
+    if(handlerInput.requestEnvelope.request.intent.slots.providerName.value == null || handlerInput.requestEnvelope.request.intent.slots.providerName.value === "?"){
+      return handlerInput.responseBuilder
+      .speak(speechText)
+      .getResponse();
+    }
+
+    if(handlerInput.requestEnvelope.request.intent.slots.providerName.value == null || handlerInput.requestEnvelope.request.intent.slots.providerName.value === "?"){
+      return handlerInput.responseBuilder
+      .speak(speechText)
+      .getResponse();
+    }
+
     return handlerInput.responseBuilder
       .speak(speechText)
       .getResponse();
@@ -95,17 +108,6 @@ const CancelAndStopIntentHandler = {
   },
 };
 
-const SessionEndedRequestHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
-  },
-  handle(handlerInput) {
-    console.log(`Session ended with reason: ${handlerInput.requestEnvelope.request.reason}`);
-
-    return handlerInput.responseBuilder.getResponse();
-  },
-};
-
 const ErrorHandler = {
   canHandle() {
     return true;
@@ -130,5 +132,7 @@ exports.handler = skillBuilder
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler
   )
+  .addRequestInterceptors(askUtils.logRequestInterceptor)
+  .addResponseInterceptors(askUtils.logResponseInterceptor)
   .addErrorHandlers(ErrorHandler)
   .lambda();
