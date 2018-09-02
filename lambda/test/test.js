@@ -16,7 +16,7 @@ async function main() {
 
     let mortgages = result.data.mortgages
 
-    speechText += "Mortgage reates are: ";
+    speechText += "Mortgage rates are: ";
     let passedTreshold = 0;
 
     for (let i = 0; i < mortgages.length; i++) {

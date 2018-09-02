@@ -6,9 +6,14 @@ const axios = require('axios');
 const utils = require('./skill-utils');
 const askUtils = require('ask-utils');
 
-const links = {
-  full: "https://s3.us-east-2.amazonaws.com/mortgage-rates-service/full.json",
-}
+
+const fullListLink = "https://s3.us-east-2.amazonaws.com/mortgage-rates-service/full.json";
+
+const otherLinks = [
+  "https://s3.us-east-2.amazonaws.com/mortgage-rates-service/Peoples+Trust.json",
+  "https://s3.us-east-2.amazonaws.com/mortgage-rates-service/Canadian+Lender.json",
+  "https://s3.us-east-2.amazonaws.com/mortgage-rates-service/mcap.json"
+]
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -20,11 +25,11 @@ const LaunchRequestHandler = {
     //comment this on production
     process.env.RATE_TRESHOLD = 5;
 
-    let result = await axios.get(links.full);
+    let result = await axios.get(fullListLink);
 
     let mortgages = result.data.mortgages
 
-    speechText += "Mortgage reates are: ";
+    speechText += "Mortgage rates are, ";
     let passedTreshold = 0;
 
     for (let i = 0; i < mortgages.length; i++) {
@@ -55,24 +60,45 @@ const ReadProviderIntentHandler = {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
       handlerInput.requestEnvelope.request.intent.name === 'ReadProviderIntent';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const speechText = 'read provider intent hello';
 
-    if(handlerInput.requestEnvelope.request.intent.slots.providerName.value == null || handlerInput.requestEnvelope.request.intent.slots.providerName.value === "?"){
+    if (handlerInput.requestEnvelope.request.intent.slots.providerName.value == null || handlerInput.requestEnvelope.request.intent.slots.providerName.value === "?") {
       return handlerInput.responseBuilder
-      .speak(speechText)
-      .getResponse();
+        .speak(speechText)
+        .getResponse();
     }
 
-    if(handlerInput.requestEnvelope.request.intent.slots.providerName.value == null || handlerInput.requestEnvelope.request.intent.slots.providerName.value === "?"){
+    if (handlerInput.requestEnvelope.request.intent.slots.providerName.resolutions &&
+      handlerInput.requestEnvelope.request.intent.slots.providerName.resolutions.resolutionsPerAuthority &&
+      handlerInput.requestEnvelope.request.intent.slots.providerName.resolutions.resolutionsPerAuthority[0] &&
+      handlerInput.requestEnvelope.request.intent.slots.providerName.resolutions.resolutionsPerAuthority[0].status.code === "ER_SUCCESS_MATCH"
+    ) {
+      let id = handlerInput.requestEnvelope.request.intent.slots.providerName.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+      let result = await axios.get(otherLinks[id]);
+
+      let provider = result.data.mortgages[0];
+
+      let speechText = `here are the rates for ${provider.provider}; `;
+
+      for (let i = 0; i < provider.rates.length; i++) {
+        speechText += `${provider.rates[i].type} is ${provider.rates[i].rate}; `;
+      }
+
       return handlerInput.responseBuilder
-      .speak(speechText)
-      .getResponse();
+        .speak(speechText)
+        .getResponse();
+    } else {
+      sppechText = "Sorry but i did not understand the provider name please tell it again."
+      var updatedIntent = handlerInput.requestEnvelope.request.intent;
+      delete updatedIntent.slots.providerName.value;
+      delete updatedIntent.slots.providerName.resolutions;
+      return handlerInput.responseBuilder
+        .speak(speechText)
+        .addElicitSlotDirective("providerName", updatedIntent)
+        .getResponse();
     }
 
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .getResponse();
   },
 };
 
@@ -130,7 +156,7 @@ exports.handler = skillBuilder
     ReadProviderIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
-    SessionEndedRequestHandler
+    askUtils.SessionEndedRequestHandler
   )
   .addRequestInterceptors(askUtils.logRequestInterceptor)
   .addResponseInterceptors(askUtils.logResponseInterceptor)

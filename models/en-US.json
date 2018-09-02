@@ -1,62 +1,97 @@
 {
   "interactionModel": {
-    "languageModel": {
-      "invocationName": "mortgage rates",
-      "types": [{
-        "name": "Providers",
-        "values": [{
-            "id": "0",
-            "name": {
-              "value": "Peoples Trust"
-            }
-          },
+      "languageModel": {
+          "invocationName": "mortgage rates",
+          "intents": [
+              {
+                  "name": "AMAZON.CancelIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.HelpIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.StopIntent",
+                  "samples": []
+              },
+              {
+                  "name": "ReadProviderIntent",
+                  "slots": [
+                      {
+                          "name": "providerName",
+                          "type": "Providers"
+                      }
+                  ],
+                  "samples": [
+                      "yes {providerName}",
+                      "Yes for {providerName}"
+                  ]
+              }
+          ],
+          "types": [
+              {
+                  "name": "Providers",
+                  "values": [
+                      {
+                          "id": "0",
+                          "name": {
+                              "value": "Peoples Trust"
+                          }
+                      },
+                      {
+                          "id": "1",
+                          "name": {
+                              "value": "Canadian Lender"
+                          }
+                      },
+                      {
+                          "id": "2",
+                          "name": {
+                              "value": "mcap",
+                              "synonyms": [
+                                  "m. c. a. p."
+                              ]
+                          }
+                      }
+                  ]
+              }
+          ]
+      },
+      "dialog": {
+          "intents": [
+              {
+                  "name": "ReadProviderIntent",
+                  "confirmationRequired": false,
+                  "prompts": {},
+                  "slots": [
+                      {
+                          "name": "providerName",
+                          "type": "Providers",
+                          "confirmationRequired": false,
+                          "elicitationRequired": true,
+                          "prompts": {
+                              "elicitation": "Elicit.Slot.1495767940547.545486829018"
+                          }
+                      }
+                  ]
+              }
+          ]
+      },
+      "prompts": [
           {
-            "id": "1",
-            "name": {
-              "value": "Canadian Lender"
-            }
-          },
-          {
-            "id": "2",
-            "name": {
-              "value": "mcap",
-              "synonyms": [
-                "m. c. a. p."
+              "id": "Elicit.Slot.1495767940547.545486829018",
+              "variations": [
+                  {
+                      "type": "PlainText",
+                      "value": "what is the name of provider"
+                  },
+                  {
+                      "type": "PlainText",
+                      "value": "please tell the provider name"
+                  }
               ]
-            }
           }
-        ]
-      }],
-      "intents": [{
-          "name": "AMAZON.CancelIntent",
-          "samples": [
-
-          ]
-        },
-        {
-          "name": "AMAZON.HelpIntent",
-          "samples": [
-
-          ]
-        },
-        {
-          "name": "AMAZON.StopIntent",
-          "samples": [
-
-          ]
-        },
-        {
-          "name": "ReadProviderIntent",
-          "slots": [{
-            "name": "providerName",
-            "type": "Providers"
-          }],
-          "samples": [
-            "yes {providerName}",
-            "Yes for {providerName}"
-          ]
-        }
       ]
-    }
   }
 }
