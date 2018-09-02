@@ -44,7 +44,7 @@ const LaunchRequestHandler = {
       speechText += "Would you like to hear all quotes for a specific provider?' If so, please say: Yes, for and the provider name";
       return handlerInput.responseBuilder
         .speak(speechText)
-        .reprompt(speechText)
+        .reprompt("Would you like to hear all quotes for a specific provider?' If so, please say: Yes, for and the provider name")
         .getResponse();
     } else {
       speechText = "sorry but i cant find Mortgage rates lowest than treshold, please try again later."
@@ -61,8 +61,6 @@ const ReadProviderIntentHandler = {
       handlerInput.requestEnvelope.request.intent.name === 'ReadProviderIntent';
   },
   async handle(handlerInput) {
-    const speechText = 'read provider intent hello';
-
     if (handlerInput.requestEnvelope.request.intent.slots.providerName.value == null || handlerInput.requestEnvelope.request.intent.slots.providerName.value === "?") {
       return handlerInput.responseBuilder
         .speak(speechText)
@@ -89,7 +87,7 @@ const ReadProviderIntentHandler = {
         .speak(speechText)
         .getResponse();
     } else {
-      sppechText = "Sorry but i did not understand the provider name please tell it again."
+      let speechText = "Sorry but i did not understand the provider name please tell it again."
       var updatedIntent = handlerInput.requestEnvelope.request.intent;
       delete updatedIntent.slots.providerName.value;
       delete updatedIntent.slots.providerName.resolutions;
@@ -108,12 +106,10 @@ const HelpIntentHandler = {
       handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
-    const speechText = 'You can say hello to me!';
+    const speechText = 'Help messaage';
 
     return handlerInput.responseBuilder
       .speak(speechText)
-      .reprompt(speechText)
-      .withSimpleCard('Hello World', speechText)
       .getResponse();
   },
 };
@@ -129,7 +125,6 @@ const CancelAndStopIntentHandler = {
 
     return handlerInput.responseBuilder
       .speak(speechText)
-      .withSimpleCard('Hello World', speechText)
       .getResponse();
   },
 };

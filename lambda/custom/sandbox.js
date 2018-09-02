@@ -1,4 +1,4 @@
-const skill = require('../custom/index');
+const skill = require('../custom');
 const axios = require('../custom/node_modules/axios')
 
 process.env.RATE_TRESHOLD = 5;
