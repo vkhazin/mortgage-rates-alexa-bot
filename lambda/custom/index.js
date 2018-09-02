@@ -106,10 +106,14 @@ const HelpIntentHandler = {
       handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
-    const speechText = 'Help messaage';
+    let speechText = 'Help messaage; ';
+
+    let finalQuestion = "What do you want to do next?";
+    speechText+= finalQuestion;
 
     return handlerInput.responseBuilder
       .speak(speechText)
+      .reprompt(finalQuestion)
       .getResponse();
   },
 };
