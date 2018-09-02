@@ -3,14 +3,14 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "summary": "Sample Short Description",
+          "summary": "skill for mortgage rates",
           "examplePhrases": [
-            "Alexa open hello world",
-            "Alexa tell hello world hello",
-            "Alexa ask hello world say hello"
+            "Alexa open mortgage rates",
+            "Alexa ask mortgage rates for help",
+            "Alexa ask mortgage rates yes for m. c. a. p."
           ],
           "name": "mortgage-rates-alexa-bot",
-          "description": "Sample Full Description"
+          "description": "skill for mortgage rates"
         }
       },
       "isAvailableWorldwide": true,
