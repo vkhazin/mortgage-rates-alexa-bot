@@ -27,8 +27,8 @@ describe("Hello World Skill", function () {
 	describe("Help intent", function () {
 		alexaTest.test([{
 			request: alexaTest.getIntentRequest("AMAZON.HelpIntent"),
-			repromptsNothing: true,
-			shouldEndSession: true
+			repromptsNothing: false,
+			shouldEndSession: false
 		}]);
 	});
 
