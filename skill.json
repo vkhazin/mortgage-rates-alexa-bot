@@ -15,6 +15,8 @@
       },
       "isAvailableWorldwide": true,
       "testingInstructions": "Sample Testing Instructions.",
+      "smallIconUri": "https://s3.amazonaws.com/arforgethedevpublic/wrench_small.png",
+      "largeIconUri": "https://s3.amazonaws.com/arforgethedevpublic/wrench_large.png",
       "category": "EDUCATION_AND_REFERENCE",
       "distributionCountries": []
     },
