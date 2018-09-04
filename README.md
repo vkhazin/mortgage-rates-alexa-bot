@@ -1,28 +1,79 @@
 # Alexa Bot to read-out mortgage rates
 
-## Design
+## Overview
 
-* Use https://github.com/vkhazin/mortgage-rates-service service to fetch mortgage rates
-* Mocked version of the service for development purposes:
-```
-https://s3.us-east-2.amazonaws.com/mortgage-rates-service/full.json
-https://s3.us-east-2.amazonaws.com/mortgage-rates-service/Peoples+Trust.json
-https://s3.us-east-2.amazonaws.com/mortgage-rates-service/Canadian+Lender.json
-https://s3.us-east-2.amazonaws.com/mortgage-rates-service/mcap.json
-```
-* Respond to an intent triggered by: 'Hey Alexa, what are today's mortgage rates!'
-* Read out the lowest mortgage rate in each category, not to exceed 5 (parameter stored in lambda environment variable)
-* Ask whether to read all rates for a provider: 'Would you like to hear all quotes for a specific provider?' If so, please say: "Yes, for" and the provider name'
-* If user has answered: 'Yes, ${provider-name}'
-* Read out all rates for the selected provider
-* Otherwise, end the interaction
- 
-## Development
+A mortgage alexa skill to fetch current Canadian mortgage rates.
 
-* Node.Js AWS Lambda hosted function to process the voice interactions
-* Automated script executable on Amazon Linux EC2 to deploy the function
-* Unit and Integration test for the function
-* Markdown documentation to setup Alexa skill on developer.amazon.com portal
+## Pre-requisites
+
+To deploy the skill user need to install:
+ - Node.js;
+ - AWS CLI;
+ - ASK CLI;
+ - Yarn
+
+## Instalation on Amazon Linux
+
+**Clone the repository**
+```bash
+git clone https://github.com/vkhazin/mortgage-rates-alexa-bot.git
+```
+
+**Install required version of Node.js:**
+```bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash && \
+  nvm install v8.11.2 && \
+  nvm use v8.11.2
+```
+
+**Install [ASK CLI](https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html):**
+```bash
+npm install -g ask-cli
+```
+
+**Install [Yarn](https://yarnpkg.com/):**
+```bash
+sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O "/etc/yum.repos.d/yarn.repo" && \
+  sudo yum install -y yarn && \
+  yarn --version
+```
+
+**Configure [AWS CLI](https://aws.amazon.com/cli/):**
+```
+$ aws configure
+AWS Access Key ID [None]: **supply your access key**
+AWS Secret Access Key [None]: **supply your secret**
+Default region name [None]: us-east-2
+Default output format [None]: json
+```
+
+**Initialize [ASK CLI](https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html):**
+```
+ask init --no-browser
+```
+
+## Skill Deployment
+
+**Deploy skill to a non-production environment**
+```
+cd ./mortgage-rates-alexa-bot
+cd ./lambda/custom
+yarn install
+yarn test
+cd ../../
+ask deploy
+```
+
+**Deploy skill to a production environment**
+Replace `yarn install` with `yarn install --production --flat`
+
+**Deploy Lambda function only**
+```
+cd ./mortgage-rates-alexa-bot
+cd ./lambda/custom
+yarn install --production --flat
+ask lambda upload -f ask-custom-mortgage-rates-alexa-bot-default -s ./
+```
 
 ## Hot to contribute
 
