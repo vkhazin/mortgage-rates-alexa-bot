@@ -64,7 +64,8 @@ cd ../../
 ask deploy
 ```
 
-**Deploy skill to a production environment**
+**Deploy skill to a production environment**  
+
 Replace `yarn install` with `yarn install --production --flat`
 
 **Deploy Lambda function only**
