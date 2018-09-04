@@ -10,20 +10,22 @@ To deploy the skill user need to install:
  - Node.js;
  - AWS CLI;
  - ASK CLI;
- - Yarn
+ - Yarn;
 
 ## Instalation on Amazon Linux
 
 **Clone the repository**
 ```bash
-git clone https://github.com/vkhazin/mortgage-rates-alexa-bot.git
+git clone https://github.com/vkhazin/mortgage-rates-alexa-bot.git && \
+  cd ./mortgage-rates-alexa-bot
 ```
 
 **Install required version of Node.js:**
 ```bash
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash && \
-  nvm install v8.11.2 && \
-  nvm use v8.11.2
+  nvm install 8.11 && \
+  nvm use 8.11 && \
+  nvm alias default 8.11
 ```
 
 **Install [ASK CLI](https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html):**
@@ -38,30 +40,29 @@ sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O "/etc/yum.repos.d/yarn.repo" &
   yarn --version
 ```
 
-**Configure [AWS CLI](https://aws.amazon.com/cli/):**
+**Environment Variables for [AWS CLI](https://aws.amazon.com/cli/):**
 ```
-$ aws configure
-AWS Access Key ID [None]: **supply your access key**
-AWS Secret Access Key [None]: **supply your secret**
-Default region name [None]: us-east-2
-Default output format [None]: json
+export AWS_ACCESS_KEY_ID='your-key' && \
+export AWS_SECRET_ACCESS_KEY='your-secret' && \
+export AWS_DEFAULT_REGION='us-east-2'
 ```
 
 **Initialize [ASK CLI](https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html):**
 ```
 ask init --no-browser
 ```
+Select option with environment variables
+
 
 ## Skill Deployment
 
 **Deploy skill to a non-production environment**
 ```
-cd ./mortgage-rates-alexa-bot
-cd ./lambda/custom
-yarn install
-yarn test
-cd ../../
-ask deploy
+cd ./lambda/custom && \
+  yarn install && \
+  yarn test && \
+  cd ../../ && \
+  ask deploy
 ```
 
 **Deploy skill to a production environment**  
