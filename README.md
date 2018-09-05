@@ -77,6 +77,13 @@ yarn install --production --flat
 ask lambda upload -f ask-custom-mortgage-rates-alexa-bot-default -s ./
 ```
 
+## Skill Removal
+
+1. Login to [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask)
+2. Select 'View Skill Id'
+3. Execute from a terminal: `ask api delete-skill --skill-id **replace with skill id**`
+
+
 ## Hot to contribute
 
 1. Fork the repo
