@@ -62,6 +62,7 @@ cd ./lambda/custom && \
   yarn install && \
   yarn test && \
   cd ../../ && \
+  cp ./.ask/config.example ./.ask/config && \
   ask deploy
 ```
 
