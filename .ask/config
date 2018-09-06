@@ -1,14 +1,14 @@
 {
   "deploy_settings": {
     "default": {
-      "skill_id": "amzn1.ask.skill.b3ecec75-935e-4742-92de-df9a4741e1ec",
+      "skill_id": "amzn1.ask.skill.3720bc58-4be2-487b-8c3d-0c470f898a33",
       "was_cloned": false,
       "merge": {
         "manifest": {
           "apis": {
             "custom": {
               "endpoint": {
-                "uri": "ask-custom-mortgage-rates-alexa-bot-default"
+                "uri": "mortgage-rates-alexa-bot-default"
               }
             }
           }
@@ -16,7 +16,7 @@
       },
       "resources": {
         "manifest": {
-          "eTag": "eed893afb64bb50766bbab47a2c4bad2"
+          "eTag": "cb0e50f7559e2bfcf31aede12ccff16a"
         },
         "interactionModel": {
           "en-US": {
@@ -25,13 +25,13 @@
         },
         "lambda": [
           {
-            "arn": "arn:aws:lambda:us-east-1:231917945460:function:ask-custom-mortgage-rates-alexa-bot-default",
-            "functionName": "arn:aws:lambda:us-east-1:231917945460:function:ask-custom-mortgage-rates-alexa-bot-default",
+            "arn": "arn:aws:lambda:us-east-1:231917945460:function:mortgage-rates-alexa-bot-default",
+            "functionName": "mortgage-rates-alexa-bot-default",
             "awsRegion": "us-east-1",
             "alexaUsage": [
               "custom/default"
             ],
-            "revisionId": "fd7da26c-7119-4164-a819-1e00d24abbc9"
+            "revisionId": "0c9206b0-a218-41cc-a030-e46303e7ea2d"
           }
         ]
       }
