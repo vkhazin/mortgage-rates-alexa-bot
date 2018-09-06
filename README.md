@@ -48,11 +48,11 @@ export AWS_DEFAULT_REGION='us-east-2'
 ```
 
 **Initialize [ASK CLI](https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html):**
-```
-ask init --no-browser
-```
-Select option with environment variables
 
+1. Run from terminal: `ask init --no-browser`
+2. Select 'Default' profile and then 'Use the AWS environment variables' to use the variables populated in the previous step
+3. Follow the instruction to obtain an authorization token
+4. Paste the token into the terminal window to continue
 
 ## Skill Deployment
 
