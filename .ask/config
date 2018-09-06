@@ -1,7 +1,7 @@
 {
   "deploy_settings": {
     "default": {
-      "skill_id": "amzn1.ask.skill.3720bc58-4be2-487b-8c3d-0c470f898a33",
+      "skill_id": "amzn1.ask.skill.a77fff43-180c-462d-a663-97cf791dfe64",
       "was_cloned": false,
       "merge": {
         "manifest": {
@@ -26,12 +26,12 @@
         "lambda": [
           {
             "arn": "arn:aws:lambda:us-east-1:231917945460:function:mortgage-rates-alexa-bot-default",
-            "functionName": "mortgage-rates-alexa-bot-default",
+            "functionName": "arn:aws:lambda:us-east-1:231917945460:function:mortgage-rates-alexa-bot-default",
             "awsRegion": "us-east-1",
             "alexaUsage": [
               "custom/default"
             ],
-            "revisionId": "0c9206b0-a218-41cc-a030-e46303e7ea2d"
+            "revisionId": "31b5c0ab-206c-44bd-8069-fa8bb81595d7"
           }
         ]
       }
