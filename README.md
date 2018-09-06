@@ -44,7 +44,7 @@ sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O "/etc/yum.repos.d/yarn.repo" &
 ```
 export AWS_ACCESS_KEY_ID='your-key' && \
 export AWS_SECRET_ACCESS_KEY='your-secret' && \
-export AWS_DEFAULT_REGION='us-east-2'
+export AWS_DEFAULT_REGION='us-east-1'
 ```
 
 **Initialize [ASK CLI](https://developer.amazon.com/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html):**
@@ -58,10 +58,10 @@ export AWS_DEFAULT_REGION='us-east-2'
 
 **Deploy skill to a non-production environment**
 ```
-cd ./lambda/custom && \
+cd ./lambda && \
   yarn install && \
   yarn test && \
-  cd ../../ && \
+  cd ../ && \
   cp ./.ask/config.template ./.ask/config && \
   ask deploy
 ```
@@ -73,9 +73,9 @@ Replace `yarn install` with `yarn install --production --flat`
 **Deploy Lambda function only**
 ```
 cd ./mortgage-rates-alexa-bot
-cd ./lambda/custom
+cd ./lambda
 yarn install --production --flat
-ask lambda upload -f ask-custom-mortgage-rates-alexa-bot-default -s ./
+ask lambda upload -f mortgage-rates-alexa-bot-default -s ./
 ```
 
 ## Skill Removal
@@ -83,8 +83,9 @@ ask lambda upload -f ask-custom-mortgage-rates-alexa-bot-default -s ./
 1. Login to [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask)
 2. Select 'View Skill Id' link
 3. Execute from a terminal: `ask api delete-skill --skill-id **replace with skill id**`
+4. To remove lambda function: `aws lambda delete-function --function-name mortgage-rates-alexa-bot-default`
 
-## Hot to contribute
+## How to contribute
 
 1. Fork the repo
 2. Make changes and commit to your own repository
