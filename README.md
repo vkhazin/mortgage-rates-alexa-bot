@@ -85,6 +85,10 @@ ask lambda upload -f mortgage-rates-alexa-bot-default -s ./
 3. Execute from a terminal: `ask api delete-skill --skill-id **replace with skill id**`
 4. To remove lambda function: `aws lambda delete-function --function-name mortgage-rates-alexa-bot-default`
 
+## Skill Testing
+
+* From a terminal run: `ask simulate --locale 'en-US' --text 'Alexa, open mortgage rates'`
+
 ## How to contribute
 
 1. Fork the repo
