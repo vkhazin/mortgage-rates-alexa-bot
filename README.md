@@ -78,6 +78,11 @@ yarn install --production --flat
 ask lambda upload -f ask-custom-mortgage-rates-alexa-bot-default -s ./
 ```
 
+**Change the treshold value**
+```
+aws lambda update-function-configuration --function-name ask-custom-mortgage-rates-alexa-bot-default --environment "Variables={RATE_TRESHOLD=4}" --region us-east-1
+```
+
 ## Hot to contribute
 
 1. Fork the repo

@@ -22,8 +22,14 @@ const LaunchRequestHandler = {
   async handle(handlerInput) {
     var speechText = 'Welcome to mortgage rates skill. ';
 
-    //comment this on production
-    process.env.RATE_TRESHOLD = 5;
+    if (!process.env.RATE_TRESHOLD) {
+      //comment this on production
+      console.log("setting the default RATE_TRESHOLD");
+      process.env.RATE_TRESHOLD = 5;
+    }
+
+    
+    console.log(`RATE_TRESHOLD=${process.env.RATE_TRESHOLD}`);
 
     let result = await axios.get(fullListLink);
 
@@ -109,7 +115,7 @@ const HelpIntentHandler = {
     let speechText = 'Help messaage; ';
 
     let finalQuestion = "What do you want to do next?";
-    speechText+= finalQuestion;
+    speechText += finalQuestion;
 
     return handlerInput.responseBuilder
       .speak(speechText)
