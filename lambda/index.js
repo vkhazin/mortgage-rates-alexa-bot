@@ -22,8 +22,12 @@ const LaunchRequestHandler = {
   async handle(handlerInput) {
     var speechText = 'Welcome to mortgage rates skill. ';
 
-    //comment this on production
-    process.env.RATE_TRESHOLD = 5;
+    if (!process.env.RATE_TRESHOLD) {
+      //set the default treshold if it not present
+      console.log("setting the default RATE_TRESHOLD");
+      process.env.RATE_TRESHOLD = 5;
+    }    
+    console.log(`RATE_TRESHOLD=${process.env.RATE_TRESHOLD}`);
 
     let result = await axios.get(fullListLink);
 

@@ -78,6 +78,11 @@ yarn install --production --flat
 ask lambda upload -f mortgage-rates-alexa-bot-default -s ./
 ```
 
+**Set treshold value**
+```
+aws lambda update-function-configuration --function-name ask-custom-mortgage-rates-alexa-bot-default --environment "Variables={RATE_TRESHOLD=4}" --region us-east-1
+```
+
 ## Skill Removal
 
 1. Login to [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask)
