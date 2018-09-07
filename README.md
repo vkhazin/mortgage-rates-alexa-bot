@@ -78,9 +78,9 @@ yarn install --production --flat
 ask lambda upload -f mortgage-rates-alexa-bot-default -s ./
 ```
 
-**Set treshold value**
+**Set threshold value**
 ```
-aws lambda update-function-configuration --function-name ask-custom-mortgage-rates-alexa-bot-default --environment "Variables={RATE_TRESHOLD=4}" --region us-east-1
+aws lambda update-function-configuration --function-name ask-custom-mortgage-rates-alexa-bot-default --environment "Variables={RATE_THRESHOLD=4}" --region us-east-1
 ```
 
 ## Skill Removal
