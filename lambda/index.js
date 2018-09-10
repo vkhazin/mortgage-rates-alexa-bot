@@ -22,32 +22,36 @@ const LaunchRequestHandler = {
   async handle(handlerInput) {
     var speechText = 'Welcome to mortgage rates skill. ';
 
-    //comment this on production
-    process.env.RATE_TRESHOLD = 5;
+    if (!process.env.RATE_THRESHOLD) {
+      //set the default threshold if it not present
+      console.log("setting the default RATE_THRESHOLD");
+      process.env.RATE_THRESHOLD = 5;
+    }    
+    console.log(`RATE_THRESHOLD=${process.env.RATE_THRESHOLD}`);
 
     let result = await axios.get(fullListLink);
 
     let mortgages = result.data.mortgages
 
     speechText += "Mortgage rates are, ";
-    let passedTreshold = 0;
+    let passedThreshold = 0;
 
     for (let i = 0; i < mortgages.length; i++) {
       let lowestRate = utils.getLowestRate(mortgages[i].rates);
-      if (lowestRate < process.env.RATE_TRESHOLD) {
-        passedTreshold++;
+      if (lowestRate < process.env.RATE_THRESHOLD) {
+        passedThreshold++;
         speechText += `for ${mortgages[i].provider} it is ${lowestRate}; `
       }
     }
 
-    if (passedTreshold) {
+    if (passedThreshold) {
       speechText += "Would you like to hear all quotes for a specific provider?' If so, please say: Yes, for and the provider name";
       return handlerInput.responseBuilder
         .speak(speechText)
         .reprompt("Would you like to hear all quotes for a specific provider?' If so, please say: Yes, for and the provider name")
         .getResponse();
     } else {
-      speechText = "sorry but i cant find Mortgage rates lowest than treshold, please try again later."
+      speechText = "sorry but i cant find Mortgage rates lowest than threshold, please try again later."
       return handlerInput.responseBuilder
         .speak(speechText)
         .getResponse();

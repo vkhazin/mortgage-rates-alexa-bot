@@ -1,7 +1,7 @@
 const skill = require('../custom');
 const axios = require('../custom/node_modules/axios')
 
-process.env.RATE_TRESHOLD = 5;
+process.env.RATE_THRESHOLD = 5;
 
 
 async function main() {
@@ -17,24 +17,24 @@ async function main() {
     let mortgages = result.data.mortgages
 
     speechText += "Mortgage rates are: ";
-    let passedTreshold = 0;
+    let passedThreshold = 0;
 
     for (let i = 0; i < mortgages.length; i++) {
       let lowestRate = getLowestRate(mortgages[i].rates);
-      if (lowestRate < process.env.RATE_TRESHOLD) {
-        passedTreshold++;
+      if (lowestRate < process.env.RATE_THRESHOLD) {
+        passedThreshold++;
         speechText += `for ${mortgages[i].provider} it is ${lowestRate}; `
       }
     }
 
-    if (passedTreshold) {
+    if (passedThreshold) {
       speechText += "Would you like to hear all quotes for a specific provider?' If so, please say: \"Yes, for\" and the provider name";
     //   return handlerInput.responseBuilder
     //     .speak(speechText)
     //     .reprompt(speechText)
     //     .getResponse();
     } else {
-      speechText = "sorry but i cant find Mortgage rates lowest than treshold, please try again later."
+      speechText = "sorry but i cant find Mortgage rates lowest than threshold, please try again later."
     //   return handlerInput.responseBuilder
     //     .speak(speechText)
     //     .getResponse();
