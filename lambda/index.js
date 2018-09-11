@@ -6,14 +6,8 @@ const axios = require('axios');
 const utils = require('./skill-utils');
 const askUtils = require('ask-utils');
 
+const baseUrl = "https://xm0elyg6o4.execute-api.us-east-2.amazonaws.com/poc/";
 
-const fullListLink = "https://s3.us-east-2.amazonaws.com/mortgage-rates-service/full.json";
-
-const otherLinks = [
-  "https://s3.us-east-2.amazonaws.com/mortgage-rates-service/Peoples+Trust.json",
-  "https://s3.us-east-2.amazonaws.com/mortgage-rates-service/Canadian+Lender.json",
-  "https://s3.us-east-2.amazonaws.com/mortgage-rates-service/mcap.json"
-]
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -29,7 +23,7 @@ const LaunchRequestHandler = {
     }    
     console.log(`RATE_THRESHOLD=${process.env.RATE_THRESHOLD}`);
 
-    let result = await axios.get(fullListLink);
+    let result = await axios.get(baseUrl);
 
     let mortgages = result.data.mortgages
 
@@ -76,8 +70,8 @@ const ReadProviderIntentHandler = {
       handlerInput.requestEnvelope.request.intent.slots.providerName.resolutions.resolutionsPerAuthority[0] &&
       handlerInput.requestEnvelope.request.intent.slots.providerName.resolutions.resolutionsPerAuthority[0].status.code === "ER_SUCCESS_MATCH"
     ) {
-      let id = handlerInput.requestEnvelope.request.intent.slots.providerName.resolutions.resolutionsPerAuthority[0].values[0].value.id;
-      let result = await axios.get(otherLinks[id]);
+      let name = handlerInput.requestEnvelope.request.intent.slots.providerName.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+      let result = await axios.get(`${baseUrl}${name}`);
 
       let provider = result.data.mortgages[0];
 
