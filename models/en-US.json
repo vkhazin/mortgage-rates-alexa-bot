@@ -1,97 +1,181 @@
 {
-  "interactionModel": {
-      "languageModel": {
-          "invocationName": "mortgage rates",
-          "intents": [
-              {
-                  "name": "AMAZON.CancelIntent",
-                  "samples": []
-              },
-              {
-                  "name": "AMAZON.HelpIntent",
-                  "samples": []
-              },
-              {
-                  "name": "AMAZON.StopIntent",
-                  "samples": []
-              },
-              {
-                  "name": "ReadProviderIntent",
-                  "slots": [
-                      {
-                          "name": "providerName",
-                          "type": "Providers"
-                      }
-                  ],
-                  "samples": [
-                      "yes {providerName}",
-                      "Yes for {providerName}"
-                  ]
-              }
-          ],
-          "types": [
-              {
-                  "name": "Providers",
-                  "values": [
-                      {
-                          "id": "0",
-                          "name": {
-                              "value": "Peoples Trust"
-                          }
-                      },
-                      {
-                          "id": "1",
-                          "name": {
-                              "value": "Canadian Lender"
-                          }
-                      },
-                      {
-                          "id": "2",
-                          "name": {
-                              "value": "mcap",
-                              "synonyms": [
-                                  "m. c. a. p."
-                              ]
-                          }
-                      }
-                  ]
-              }
-          ]
-      },
-      "dialog": {
-          "intents": [
-              {
-                  "name": "ReadProviderIntent",
-                  "confirmationRequired": false,
-                  "prompts": {},
-                  "slots": [
-                      {
-                          "name": "providerName",
-                          "type": "Providers",
-                          "confirmationRequired": false,
-                          "elicitationRequired": true,
-                          "prompts": {
-                              "elicitation": "Elicit.Slot.1495767940547.545486829018"
-                          }
-                      }
-                  ]
-              }
-          ]
-      },
-      "prompts": [
-          {
-              "id": "Elicit.Slot.1495767940547.545486829018",
-              "variations": [
-                  {
-                      "type": "PlainText",
-                      "value": "what is the name of provider"
-                  },
-                  {
-                      "type": "PlainText",
-                      "value": "please tell the provider name"
-                  }
-              ]
-          }
-      ]
-  }
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "mortgage rates",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "ReadProviderIntent",
+                    "slots": [
+                        {
+                            "name": "providerName",
+                            "type": "Providers"
+                        }
+                    ],
+                    "samples": [
+                        "yes {providerName}",
+                        "Yes for {providerName}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "Providers",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "MCAP",
+                                "synonyms": [
+                                    "m. c. a. p."
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Canadian Lender"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Peoples Trust"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Duca"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Equitable Bank"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "HSBC",
+                                "synonyms": [
+                                    "h. s. b. c."
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Big 6 Bank"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Meridian Credit Union"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "TD Bank",
+                                "synonyms": [
+                                    "t. d. bank"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Desjardins"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "RBC Royal Bank",
+                                "synonyms": [
+                                    "r. b. c. Royal Bank"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Tangerine"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Scotiabank"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "CIBC",
+                                "synonyms": [
+                                    "c. i. b. c."
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Simplii Financial"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "National Bank"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Bank of Montreal"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Alterna Savings"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "ReadProviderIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "providerName",
+                            "type": "Providers",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1495767940547.545486829018"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.1495767940547.545486829018",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what is the name of provider"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "please tell the provider name"
+                    }
+                ]
+            }
+        ]
+    }
 }
