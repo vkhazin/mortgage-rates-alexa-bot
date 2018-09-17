@@ -6,7 +6,7 @@ const axios = require('axios');
 const utils = require('./skill-utils');
 const askUtils = require('ask-utils');
 
-const baseUrl = "https://xm0elyg6o4.execute-api.us-east-2.amazonaws.com/poc/";
+const baseUrl = process.env.MORTGAGE_RATES_SERVICE_URL || "https://jsej2cbo51.execute-api.us-east-2.amazonaws.com/poc/";
 
 
 const LaunchRequestHandler = {
@@ -14,13 +14,13 @@ const LaunchRequestHandler = {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
   async handle(handlerInput) {
-    var speechText = 'Welcome to mortgage rates skill. ';
+    var speechText = 'Welcome to canadian mortgage rates skill. ';
 
     if (!process.env.RATE_THRESHOLD) {
       //set the default threshold if it not present
       console.log("setting the default RATE_THRESHOLD");
       process.env.RATE_THRESHOLD = 5;
-    }    
+    }
     console.log(`RATE_THRESHOLD=${process.env.RATE_THRESHOLD}`);
 
     let result = await axios.get(baseUrl);
@@ -45,7 +45,7 @@ const LaunchRequestHandler = {
         .reprompt("Would you like to hear all quotes for a specific provider?' If so, please say: Yes, for and the provider name")
         .getResponse();
     } else {
-      speechText = "sorry but i cant find Mortgage rates lowest than threshold, please try again later."
+      speechText = "sorry but i cant find mortgage rates lowest than threshold, please try again later."
       return handlerInput.responseBuilder
         .speak(speechText)
         .getResponse();

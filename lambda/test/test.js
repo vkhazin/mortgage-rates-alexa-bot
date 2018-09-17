@@ -1,12 +1,5 @@
-/*
-Mocha tests for the Alexa skill "Hello World" example (https://github.com/alexa/skill-sample-nodejs-hello-world).
-Using the Alexa Skill Test Framework (https://github.com/BrianMacIntosh/alexa-skill-test-framework).
-Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
-*/
-
 // include the testing framework
-//const alexaTest = require('alexa-skill-test-framework');
-const alexaTest = require('alexa-skill-test-framework');
+const alexaTest   = require('alexa-skill-test-framework');
 
 // initialize the testing framework
 alexaTest.initialize(
@@ -14,11 +7,11 @@ alexaTest.initialize(
 	"amzn1.ask.skill.00000000-0000-0000-0000-000000000000",
 	"amzn1.ask.account.VOID");
 
-describe("Hello World Skill", function () {
+describe("Invocation", function () {
 	describe("LaunchRequest", function () {
 		alexaTest.test([{
 			request: alexaTest.getLaunchRequest(),
-			saysLike: "Welcome to mortgage rates skill.",
+			saysLike: "Welcome to canadian mortgage rates skill.",
 			repromptsNothing: false,
 			shouldEndSession: false
 		}]);
@@ -31,7 +24,6 @@ describe("Hello World Skill", function () {
 			shouldEndSession: false
 		}]);
 	});
-
 
 	describe("session ended request", function () {
 		alexaTest.test([{
@@ -50,7 +42,6 @@ describe("Hello World Skill", function () {
 		}]);
 	});
 
-	
 	describe("stop", function () {
 		alexaTest.test([{
 			request: alexaTest.getIntentRequest("AMAZON.StopIntent"),

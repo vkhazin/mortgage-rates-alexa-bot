@@ -4,14 +4,6 @@
 
 A mortgage alexa skill to announce current Canadian mortgage rates.
 
-## Pre-requisites
-
-To deploy the skill user need to install:
- - Node.js;
- - AWS CLI;
- - ASK CLI;
- - Yarn;
-
 ## Instalation on Amazon Linux
 
 **Clone the repository**
@@ -71,6 +63,7 @@ cd ./lambda && \
 Replace `yarn install` with `yarn install --production --flat`
 
 **Deploy Lambda function only**
+
 ```
 cd ./mortgage-rates-alexa-bot
 cd ./lambda
@@ -78,9 +71,27 @@ yarn install --production --flat
 ask lambda upload -f mortgage-rates-alexa-bot-default -s ./
 ```
 
-**Set threshold value**
+**Set Threshold Value**
 ```
-aws lambda update-function-configuration --function-name ask-custom-mortgage-rates-alexa-bot-default --environment "Variables={RATE_THRESHOLD=4}" --region us-east-1
+aws lambda update-function-configuration --function-name mortgage-rates-alexa-bot-default \
+    --environment "Variables={RATE_THRESHOLD=4}"
+```
+
+**Set Mortgage Rates Service Url**
+
+```
+aws lambda update-function-configuration --function-name mortgage-rates-alexa-bot-default \
+    --environment "Variables={MORTGAGE_RATES_SERVICE_URL=https://jsej2cbo51.execute-api.us-east-2.amazonaws.com/poc/}" 
+```
+
+## Re-deploy existing skill
+
+```
+cd ./lambda && \
+  yarn install && \
+  yarn test && \
+  cd ../ && \
+  ask deploy
 ```
 
 ## Skill Removal

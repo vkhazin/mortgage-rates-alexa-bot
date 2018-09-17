@@ -3,14 +3,14 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "summary": "skill for mortgage rates",
+          "summary": "skill for canadian mortgage rates",
           "examplePhrases": [
-            "Alexa open mortgage rates",
-            "Alexa ask mortgage rates for help",
-            "Alexa ask mortgage rates yes for m. c. a. p."
+            "Alexa open canadian mortgage rates",
+            "Alexa ask canadian mortgage rates",
+            "Alexa ask candian mortgage rates for m. c. a. p."
           ],
           "name": "mortgage-rates-alexa-bot",
-          "description": "skill for mortgage rates",          
+          "description": "skill for canadian mortgage rates",          
           "smallIconUri": "https://s3.amazonaws.com/arforgethedevpublic/wrench_small.png",
           "largeIconUri": "https://s3.amazonaws.com/arforgethedevpublic/wrench_large.png"
         }
