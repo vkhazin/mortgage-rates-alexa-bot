@@ -4,7 +4,6 @@
 const Alexa = require('ask-sdk-core');
 const axios = require('axios');
 const utils = require('./skill-utils');
-const askUtils = require('ask-utils');
 
 const baseUrl = "https://xm0elyg6o4.execute-api.us-east-2.amazonaws.com/poc/";
 
@@ -145,6 +144,28 @@ const ErrorHandler = {
   },
 };
 
+const logRequestInterceptor = {
+  process(handlerInput) {
+      console.log(`REQUEST++++${JSON.stringify(handlerInput.requestEnvelope, null, 2)}`);
+  },
+};
+
+const logResponseInterceptor = {
+  process(handlerInput, response) {
+      console.log(`RESPONSE++++${JSON.stringify(response)}`);
+  },
+};
+
+const SessionEndedRequestHandler = {
+  canHandle(handlerInput) {
+      return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+  },
+  handle(handlerInput) {
+      //any cleanup logic goes here
+      return handlerInput.responseBuilder.getResponse();
+  }
+};
+
 const skillBuilder = Alexa.SkillBuilders.custom();
 
 exports.handler = skillBuilder
@@ -153,9 +174,9 @@ exports.handler = skillBuilder
     ReadProviderIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
-    askUtils.SessionEndedRequestHandler
+    SessionEndedRequestHandler
   )
-  .addRequestInterceptors(askUtils.logRequestInterceptor)
-  .addResponseInterceptors(askUtils.logResponseInterceptor)
+  .addRequestInterceptors(logRequestInterceptor)
+  .addResponseInterceptors(logResponseInterceptor)
   .addErrorHandlers(ErrorHandler)
   .lambda();
