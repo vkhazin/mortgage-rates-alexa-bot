@@ -11,7 +11,7 @@ describe("Invocation", function () {
 	describe("LaunchRequest", function () {
 		alexaTest.test([{
 			request: alexaTest.getLaunchRequest(),
-			saysLike: "Welcome to canadian mortgage rates skill.",
+			saysLike: "Welcome to mortgage rates skill.",
 			repromptsNothing: false,
 			shouldEndSession: false
 		}]);

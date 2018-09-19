@@ -4,7 +4,6 @@
 const Alexa = require('ask-sdk-core');
 const axios = require('axios');
 const utils = require('./skill-utils');
-const askUtils = require('ask-utils');
 
 const baseUrl = process.env.MORTGAGE_RATES_SERVICE_URL || "https://jsej2cbo51.execute-api.us-east-2.amazonaws.com/poc/";
 
@@ -14,7 +13,7 @@ const LaunchRequestHandler = {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
   async handle(handlerInput) {
-    var speechText = 'Welcome to canadian mortgage rates skill. ';
+    var speechText = 'Welcome to mortgage rates skill. ';
 
     if (!process.env.RATE_THRESHOLD) {
       //set the default threshold if it not present
@@ -153,9 +152,9 @@ exports.handler = skillBuilder
     ReadProviderIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
-    askUtils.SessionEndedRequestHandler
+    utils.SessionEndedRequestHandler
   )
-  .addRequestInterceptors(askUtils.logRequestInterceptor)
-  .addResponseInterceptors(askUtils.logResponseInterceptor)
+  .addRequestInterceptors(utils.logRequestInterceptor)
+  .addResponseInterceptors(utils.logResponseInterceptor)
   .addErrorHandlers(ErrorHandler)
   .lambda();

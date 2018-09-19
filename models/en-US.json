@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "canadian mortgage rates",
+      "invocationName": "mortgage rates",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -97,7 +97,8 @@
                 "value": "RBC Royal Bank",
                 "synonyms": [
                   "r. b. c.",
-                  "royal bank"
+                  "royal bank",
+                  "rbc"
                 ]
               }
             },

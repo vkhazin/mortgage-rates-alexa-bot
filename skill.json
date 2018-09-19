@@ -3,11 +3,11 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "summary": "skill for canadian mortgage rates",
+          "summary": "skill for mortgage rates",
           "examplePhrases": [
-            "Alexa open canadian mortgage rates",
-            "Alexa ask canadian mortgage rates",
-            "Alexa ask candian mortgage rates for m. c. a. p."
+            "Alexa open mortgage rates",
+            "Alexa ask mortgage rates",
+            "Alexa ask mortgage rates for m. c. a. p."
           ],
           "name": "mortgage-rates-alexa-bot",
           "description": "skill for canadian mortgage rates",          
