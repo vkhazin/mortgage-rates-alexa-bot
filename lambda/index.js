@@ -21,8 +21,12 @@ const LaunchRequestHandler = {
       process.env.RATE_THRESHOLD = 5;
     }
     console.log(`RATE_THRESHOLD=${process.env.RATE_THRESHOLD}`);
-
-    let result = await axios.get(baseUrl);
+    try {
+      var result = await axios.get(baseUrl);
+    } catch (err) {
+      console.log(err.stack);
+      throw new Error("api_error")
+    }
 
     let mortgages = result.data.mortgages
 
@@ -44,7 +48,7 @@ const LaunchRequestHandler = {
         .reprompt("Would you like to hear all quotes for a specific provider?' If so, please say: Yes, for and the provider name")
         .getResponse();
     } else {
-      speechText = "sorry but i cant find mortgage rates lowest than threshold, please try again later."
+      speechText = "sorry but i cant find Mortgage rates lowest than threshold, please try again later."
       return handlerInput.responseBuilder
         .speak(speechText)
         .getResponse();
@@ -70,7 +74,12 @@ const ReadProviderIntentHandler = {
       handlerInput.requestEnvelope.request.intent.slots.providerName.resolutions.resolutionsPerAuthority[0].status.code === "ER_SUCCESS_MATCH"
     ) {
       let name = handlerInput.requestEnvelope.request.intent.slots.providerName.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-      let result = await axios.get(`${baseUrl}${name}`);
+      try {
+        var result = await axios.get(`${baseUrl}${name}`);
+      } catch (err) {
+        console.log(err.stack);
+        throw new Error("api_error")
+      }
 
       let provider = result.data.mortgages[0];
 
@@ -106,7 +115,7 @@ const HelpIntentHandler = {
     let speechText = 'Help messaage; ';
 
     let finalQuestion = "What do you want to do next?";
-    speechText+= finalQuestion;
+    speechText += finalQuestion;
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -130,6 +139,20 @@ const CancelAndStopIntentHandler = {
   },
 };
 
+const ApiErrorHandler = {
+  canHandle(handlerInput, error) {
+    console.log(`message: ${error.message}`);
+    return error.message === 'api_error';
+  },
+  handle(handlerInput, error) {
+    console.log(`Error handled: ${error.message}\n${error.stack}`);
+
+    return handlerInput.responseBuilder
+      .speak('Sorry, I have some problems with accessing martgage rates data right now. Please try again later')
+      .getResponse();
+  },
+};
+
 const ErrorHandler = {
   canHandle() {
     return true;
@@ -144,6 +167,28 @@ const ErrorHandler = {
   },
 };
 
+const logRequestInterceptor = {
+  process(handlerInput) {
+    console.log(`REQUEST++++${JSON.stringify(handlerInput.requestEnvelope, null, 2)}`);
+  },
+};
+
+const logResponseInterceptor = {
+  process(handlerInput, response) {
+    console.log(`RESPONSE++++${JSON.stringify(response)}`);
+  },
+};
+
+const SessionEndedRequestHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+  },
+  handle(handlerInput) {
+    //any cleanup logic goes here
+    return handlerInput.responseBuilder.getResponse();
+  }
+};
+
 const skillBuilder = Alexa.SkillBuilders.custom();
 
 exports.handler = skillBuilder
@@ -152,9 +197,9 @@ exports.handler = skillBuilder
     ReadProviderIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
-    utils.SessionEndedRequestHandler
+    SessionEndedRequestHandler
   )
-  .addRequestInterceptors(utils.logRequestInterceptor)
-  .addResponseInterceptors(utils.logResponseInterceptor)
-  .addErrorHandlers(ErrorHandler)
+  .addRequestInterceptors(logRequestInterceptor)
+  .addResponseInterceptors(logResponseInterceptor)
+  .addErrorHandlers(ApiErrorHandler, ErrorHandler)
   .lambda();

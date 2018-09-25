@@ -1,5 +1,6 @@
 // include the testing framework
-const alexaTest   = require('alexa-skill-test-framework');
+const alexaTest 	= require('alexa-skill-test-framework');
+const timeOut		= 5000;
 
 // initialize the testing framework
 alexaTest.initialize(
@@ -8,6 +9,7 @@ alexaTest.initialize(
 	"amzn1.ask.account.VOID");
 
 describe("Invocation", function () {
+	
 	describe("LaunchRequest", function () {
 		alexaTest.test([{
 			request: alexaTest.getLaunchRequest(),
@@ -15,7 +17,7 @@ describe("Invocation", function () {
 			repromptsNothing: false,
 			shouldEndSession: false
 		}]);
-	});
+	}).timeout(timeOut);
 
 	describe("Help intent", function () {
 		alexaTest.test([{
@@ -23,7 +25,7 @@ describe("Invocation", function () {
 			repromptsNothing: false,
 			shouldEndSession: false
 		}]);
-	});
+	}).timeout(timeOut);
 
 	describe("session ended request", function () {
 		alexaTest.test([{
@@ -31,7 +33,7 @@ describe("Invocation", function () {
 			repromptsNothing: true,
 			shouldEndSession: true
 		}]);
-	});
+	}).timeout(timeOut);
 
 	describe("cancel", function () {
 		alexaTest.test([{
@@ -40,7 +42,7 @@ describe("Invocation", function () {
 			repromptsNothing: true,
 			shouldEndSession: true
 		}]);
-	});
+	}).timeout(timeOut);
 
 	describe("stop", function () {
 		alexaTest.test([{
@@ -49,11 +51,11 @@ describe("Invocation", function () {
 			repromptsNothing: true,
 			shouldEndSession: true
 		}]);
-	});
+	}).timeout(timeOut);
 
 	describe('ReadProviderIntent sucess match', function () {
 		const slot = {
-			'providerName': 'Canadian Lender'
+			'providerName': 'rbc'
 		};
 
 		const requestWithEntityResolution = alexaTest.addEntityResolutionToRequest(
@@ -70,22 +72,22 @@ describe("Invocation", function () {
 			shouldEndSession: true,
 			repromptsNothing: true
 		}]);
-	});
+	}).timeout(timeOut);
 
 
-	describe('ReadProviderIntent no match', function () {
-		const requestWithEntityResolution = alexaTest.addEntityResolutionNoMatchToRequest(
-			alexaTest.getIntentRequest('ReadProviderIntent'),
-			'providerName',
-			'Providers',
-			'Large Trails'
-		);
+	// describe('ReadProviderIntent no match', function () {
+	// 	const requestWithEntityResolution = alexaTest.addEntityResolutionNoMatchToRequest(
+	// 		alexaTest.getIntentRequest('ReadProviderIntent'),
+	// 		'providerName',
+	// 		'Providers',
+	// 		'Large Trails'
+	// 	);
 
-		alexaTest.test([{
-			request: requestWithEntityResolution,
-			says: "Sorry but i did not understand the provider name please tell it again.",
-			shouldEndSession: true,
-			repromptsNothing: true
-		}]);
-	});
+	// 	alexaTest.test([{
+	// 		request: requestWithEntityResolution,
+	// 		says: "Sorry but i did not understand the provider name please tell it again.",
+	// 		shouldEndSession: true,
+	// 		repromptsNothing: true
+	// 	}]);
+	// }).timeout(timeOut);
 });

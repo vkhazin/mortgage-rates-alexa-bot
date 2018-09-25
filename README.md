@@ -48,14 +48,18 @@ export AWS_DEFAULT_REGION='us-east-1'
 
 ## Skill Deployment
 
-**Deploy skill to a non-production environment**
+**Install Dependencies and Test**
 ```
 cd ./lambda && \
   yarn install && \
-  yarn test && \
-  cd ../ && \
-  cp ./.ask/config.template ./.ask/config && \
-  ask deploy
+  yarn test
+cd ..\
+```
+
+**Deploy skill to a non-production environment**
+```
+cp ./.ask/config.template ./.ask/config && \
+ask deploy
 ```
 
 **Deploy skill to a production environment**  

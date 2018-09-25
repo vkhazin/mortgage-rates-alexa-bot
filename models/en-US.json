@@ -43,7 +43,10 @@
             },
             {
               "name": {
-                "value": "Canadian Lender"
+                "value": "Canadian Lender",
+                "synonyms": [
+                    "canadian lender"
+                ]
               }
             },
             {
