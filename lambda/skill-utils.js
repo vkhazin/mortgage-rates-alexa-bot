@@ -1,17 +1,3 @@
-// module.exports.getLowestRate = (items, limit) => {
-//   var id = 0;
-//   var lowest = items[0].rate;
-//   var tmp;
-//   for (var i = 0; i < items.length; i++) {
-//       tmp = items[i].rate;
-//       if (tmp < lowest) {
-//           id = i;
-//           lowest = tmp;
-//       }
-//   }
-//   return id;
-// }
-
 module.exports.getLowestRates = (rates, limitPerType) => {
 
   let types = [
