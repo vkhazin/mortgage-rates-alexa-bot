@@ -52,42 +52,42 @@ describe("Invocation", function () {
 			shouldEndSession: true
 		}]);
 	}).timeout(timeOut);
+	
+	// describe('ReadProviderIntent success match', function () {
+	// 	const slot = {
+	// 		'providerName': 'Yes, for Royal Bank'
+	// 	};
 
-	describe('ReadProviderIntent sucess match', function () {
-		const slot = {
-			'providerName': 'rbc'
-		};
-
-		const requestWithEntityResolution = alexaTest.addEntityResolutionToRequest(
-			alexaTest.getIntentRequest('ReadProviderIntent', slot),
-			'providerName',
-			'Providers',
-			'Canadian Lender',
-			'0'
-		);
-
-		alexaTest.test([{
-			request: requestWithEntityResolution,
-			saysLike: "here are the rates for",
-			shouldEndSession: true,
-			repromptsNothing: true
-		}]);
-	}).timeout(timeOut);
-
-
-	// describe('ReadProviderIntent no match', function () {
-	// 	const requestWithEntityResolution = alexaTest.addEntityResolutionNoMatchToRequest(
-	// 		alexaTest.getIntentRequest('ReadProviderIntent'),
+	// 	const requestWithEntityResolution = alexaTest.addEntityResolutionToRequest(
+	// 		alexaTest.getIntentRequest('ReadProviderIntent', slot),
 	// 		'providerName',
 	// 		'Providers',
-	// 		'Large Trails'
+	// 		'Canadian Lender',
+	// 		'0'
 	// 	);
 
 	// 	alexaTest.test([{
 	// 		request: requestWithEntityResolution,
-	// 		says: "Sorry but i did not understand the provider name please tell it again.",
+	// 		saysLike: "here are the rates for",
 	// 		shouldEndSession: true,
 	// 		repromptsNothing: true
 	// 	}]);
 	// }).timeout(timeOut);
+
+
+	describe('ReadProviderIntent no match', function () {
+		const requestWithEntityResolution = alexaTest.addEntityResolutionNoMatchToRequest(
+			alexaTest.getIntentRequest('ReadProviderIntent'),
+			'providerName',
+			'Providers',
+			'Large Trails'
+		);
+
+		alexaTest.test([{
+			request: requestWithEntityResolution,
+			says: "Sorry but i did not understand the provider name please tell it again.",
+			shouldEndSession: true,
+			repromptsNothing: true
+		}]);
+	}).timeout(timeOut);
 });

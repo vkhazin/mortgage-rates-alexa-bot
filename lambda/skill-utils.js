@@ -1,15 +1,72 @@
-module.exports.getLowestRate = function (items) {
-  var id = 0;
-  var lowest = items[0].rate;
-  var tmp;
-  for (var i = 0; i < items.length; i++) {
-      tmp = items[i].rate;
-      if (tmp < lowest) {
-          id = i;
-          lowest = tmp;
-      }
-  }
-  return id;
+// module.exports.getLowestRate = (items, limit) => {
+//   var id = 0;
+//   var lowest = items[0].rate;
+//   var tmp;
+//   for (var i = 0; i < items.length; i++) {
+//       tmp = items[i].rate;
+//       if (tmp < lowest) {
+//           id = i;
+//           lowest = tmp;
+//       }
+//   }
+//   return id;
+// }
+
+module.exports.getLowestRates = (rates, limitPerType) => {
+
+  let types = [
+      "5-years-variable",
+      "3-years-fixed",
+      "5-years-fixed",
+      "10-years-fixed"
+    ];
+  
+  let result = [];
+
+  types.forEach(type => {
+    result = result.concat(
+      //Eliminate 0 rates
+      rates.mortgages.filter(i => i.rates.find(r => r.type == type).rate > 0)
+      //Sort by rate
+      .sort(
+        i => i.rates.find(r => r.type == type).rate
+      )
+      //Return top N for each rate
+      .slice(0, limitPerType)
+      //Remap the output
+      .map(i => {
+              const selectedRate = i.rates.find(r => r.type == type);
+              const result = {
+                  provider: i.provider,
+                  type: selectedRate.type,
+                  rate: selectedRate.rate    
+              };
+              return result;
+          }
+      )
+    );   
+  });
+  
+  //Sort by rate
+  result = result.sort(i => i.rate);
+  
+  //Sample output
+  /*
+  [
+    {
+      "provider": "Scotiabank",
+      "type": "10-years-fixed",
+      "rate": 4.74
+    },
+    {
+      "provider": "Tangerine",
+      "type": "10-years-fixed",
+      "rate": 3.89
+    }
+  ]
+  */
+  return result;
+  
 }
 
 module.exports.logRequestInterceptor = {

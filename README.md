@@ -69,16 +69,14 @@ Replace `yarn install` with `yarn install --production --flat`
 **Deploy Lambda function only**
 
 ```
-cd ./mortgage-rates-alexa-bot
 cd ./lambda
-yarn install --production --flat
 ask lambda upload -f mortgage-rates-alexa-bot-default -s ./
 ```
 
 **Set Threshold Value**
 ```
 aws lambda update-function-configuration --function-name mortgage-rates-alexa-bot-default \
-    --environment "Variables={RATE_THRESHOLD=4}"
+    --environment "Variables={RATE_THRESHOLD=2}"
 ```
 
 **Set Mortgage Rates Service Url**
