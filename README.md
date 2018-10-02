@@ -2,7 +2,16 @@
 
 ## Overview
 
-A mortgage alexa skill to announce current Canadian mortgage rates.
+* A mortgage alexa skill to announce current Canadian mortgage rates.
+* The bot is using an external service using AWS API-Gateway and Lambda for it's data: https://github.com/vkhazin/mortgage-rates-service
+* To launch the skill use a phrase: 'Alexa, open mortgage rates'
+* Alexa will read back lowest mortgage rates across different providers and categories, e.g. '10 years fixed' and '3 years variable'
+* Additional intent supported is to ask for a specific morgage provider rates, e.g.: 'Yes, for Rbc'
+* Alexa will respnd back with all rates for the selected provider
+
+## Architecture
+
+![](./doc/media/architecture.jpg)
 
 ## Instalation on Amazon Linux
 
