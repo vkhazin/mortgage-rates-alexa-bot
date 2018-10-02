@@ -11,7 +11,7 @@
 
 ## Architecture
 
-![](./doc/media/architecture.jpg)
+![](./doc/media/Architecture.jpg)
 
 ## Instalation on Amazon Linux
 
